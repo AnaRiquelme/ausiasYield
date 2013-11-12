@@ -222,6 +222,10 @@ public class Contexto {
         return getExceptForm("filter", "filteroperator", "filtervalue");
     }
 
+    public String getSerializedParamsExceptNrppFormFormat() {
+        return getExceptForm("nrpp", "","");
+    }
+
     public String getSerializedParamsExceptOrder() {
         return getExcept("order", "ordervalue");
     }

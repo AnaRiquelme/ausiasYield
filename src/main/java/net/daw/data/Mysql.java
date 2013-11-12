@@ -250,6 +250,55 @@ public class Mysql implements GenericData {
     }
 
     @Override
+    public int getCount(String strTabla, ArrayList<FilterBean> alFilter) throws Exception {
+        int intResult = 0;
+        Statement oStatement;
+        try {
+            oStatement = (Statement) oConexionMySQL.createStatement();
+            String strSQL = "SELECT count(*) FROM " + strTabla + " WHERE 1=1";
+            if (alFilter != null) {
+                Iterator iterator = alFilter.iterator();
+                while (iterator.hasNext()) {
+                    FilterBean oFilterBean = (FilterBean) iterator.next();
+                    switch (oFilterBean.getFilterOperator()) {
+                        case "like":
+                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue() + "%'";
+                            break;
+                        case "notlike":
+                            strSQL += " AND " + oFilterBean.getFilter() + " NOT LIKE '%" + oFilterBean.getFilterValue() + "%'";
+                            break;
+                        case "equals":
+                            strSQL += " AND " + oFilterBean.getFilter() + " = '" + oFilterBean.getFilterValue() + "'";
+                            break;
+                        case "notequalto":
+                            strSQL += " AND " + oFilterBean.getFilter() + " <> '" + oFilterBean.getFilterValue() + "'";
+                            break;
+                        case "less":
+                            strSQL += " AND " + oFilterBean.getFilter() + " < " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "lessorequal":
+                            strSQL += " AND " + oFilterBean.getFilter() + " <= " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "greater":
+                            strSQL += " AND " + oFilterBean.getFilter() + " > " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "greaterorequal":
+                            strSQL += " AND " + oFilterBean.getFilter() + " >= " + oFilterBean.getFilterValue() + "";
+                            break;
+                    }
+                }
+            }
+            ResultSet oResultSet = oStatement.executeQuery(strSQL);
+            while (oResultSet.next()) {
+                intResult = oResultSet.getInt("COUNT(*)");
+            }
+            return intResult;
+        } catch (SQLException e) {
+            throw new Exception("mysql.getCount: Error en la consulta: " + e.getMessage());
+        }
+    }
+
+    @Override
     public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         try {
             ArrayList<Integer> vector = new ArrayList<>();

@@ -1,4 +1,3 @@
-
 package net.daw.connection;
 
 import java.sql.Connection;

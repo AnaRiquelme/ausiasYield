@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Comprausiàs March</title>
+        <title>Comprausiï¿½s March</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span>
                     </a> 
-                    <a class="brand" href="Controller">ComprAusiàs March</a>
+                    <a class="brand" href="Controller">ausiÃ sYield March</a>
                     <div class="nav-collapse collapse">
                         <%
                             if (oUserBean != null) {
@@ -47,7 +47,7 @@
                             <%
                                 if (oUserBean != null) {
                             %>
-                            Estás logueado como <%=oUserBean.getNombre()%>&nbsp;&nbsp;&nbsp;&nbsp;
+                            Estï¿½s logueado como <%=oUserBean.getLogin()%>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a class="navbar-link" href="Controller?class=usuario&method=logout">(Salir del sistema)</a>
                             <%
                             } else {
